@@ -1,3 +1,7 @@
+"
+I represent a query.
+See jql.h
+"
 Class {
 	#name : #JQL,
 	#superclass : #EJDBExternalPointer,

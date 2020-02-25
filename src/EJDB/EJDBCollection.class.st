@@ -50,8 +50,8 @@ EJDBCollection >> at: oid [
 	| record |
 	
 	record := JBL new.
-	self ejdb_get: oid to: record.
-	^ record
+	self validateResult: (self ejdb_get: oid to: record).
+	^ record autoRelease
 ]
 
 { #category : #accessing }

@@ -68,13 +68,26 @@ EJDB >> collectionNamed: aName [
 		ifAbsentPut: [ EJDBCollection newDatabase: self name: aName ]
 ]
 
-{ #category : #private }
+{ #category : #accessing }
+EJDB >> collectionNames [
+
+	^ (self meta toJSONDictionary at: #collections) 
+		collect: [ :each | each at: #name ]
+]
+
+{ #category : #'private primitives' }
 EJDB >> ejdb_close [
  
 	self ffiCall: #(iwrc ejdb_close(EJDB *self))
 ]
 
-{ #category : #private }
+{ #category : #'private primitives' }
+EJDB >> ejdb_get_meta: jblp [
+
+	^ self ffiCall: #(iwrc ejdb_get_meta(self, JBL *jblp))
+]
+
+{ #category : #'private primitives' }
 EJDB >> ejdb_remove_collection: coll [
 
 	self ffiCall: #(iwrc ejdb_remove_collection(self, const char *coll))
@@ -85,6 +98,15 @@ EJDB >> initialize [
 
 	super initialize.
 	collections := Dictionary new
+]
+
+{ #category : #private }
+EJDB >> meta [
+	| document |
+	
+	document := JBL new.
+	self validateResult: (self ejdb_get_meta: document).
+	^ document autoRelease
 ]
 
 { #category : #accessing }

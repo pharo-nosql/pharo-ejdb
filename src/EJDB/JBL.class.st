@@ -1,3 +1,8 @@
+"
+I represent a JSON document.
+See jbl.h
+
+"
 Class {
 	#name : #JBL,
 	#superclass : #EJDBExternalPointer,
@@ -56,7 +61,7 @@ JBL >> destroy [
 	self getHandle beNull
 ]
 
-{ #category : #private }
+{ #category : #'private primitives' }
 JBL >> jbl_as_json_printer: pt data: op flags: pf [
 
 	^ self ffiCall: #(iwrc jbl_as_json(
@@ -67,13 +72,19 @@ JBL >> jbl_as_json_printer: pt data: op flags: pf [
 ]
 
 { #category : #converting }
-JBL >> toString [
+JBL >> toJSONDictionary [
 	
-	^ self toStringFormat: JBL_PRINT_CODEPOINTS
+	^ STON fromString: self toJSONString
+]
+
+{ #category : #converting }
+JBL >> toJSONString [
+	
+	^ self toJSONStringFormat: JBL_PRINT_CODEPOINTS
 ]
 
 { #category : #private }
-JBL >> toStringFormat: aPrintFormat [
+JBL >> toJSONStringFormat: aPrintFormat [
 	| xstr |
 	
 	xstr := IWXSTR new.
@@ -89,7 +100,7 @@ JBL >> toStringFormat: aPrintFormat [
 ]
 
 { #category : #converting }
-JBL >> toStringPretty [
+JBL >> toJSONStringPretty [
 	
-	^ self toStringFormat: JBL_PRINT_PRETTY
+	^ self toJSONStringFormat: JBL_PRINT_PRETTY
 ]
