@@ -71,6 +71,10 @@ JQL >> ejdb_exec: ux [
 
 { #category : #enumerating }
 JQL >> resultsDo: aBlock [
+	"traverses the query cursor calling a block with the result. 
+	 aBlock receives two arguments: 
+		- id
+		- record"
 	| ux |
 
 	ux := EJDB_EXEC new
@@ -78,8 +82,9 @@ JQL >> resultsDo: aBlock [
 		q: self;
 		visitor: (EJDBCallback 
 			signature: #(iwrc ("struct _EJDB_EXEC *"void *ctx, "EJDB_DOC" void *doc, int64_t *step))
-			block: [ :ctx :doc :step | 
-				aBlock value: (EJDB_DOC fromHandle: doc) raw.
+			block: [ :ctx :docHandle :step | | doc |
+				doc := EJDB_DOC fromHandle: docHandle.
+				aBlock value: doc id value: doc raw.
 				0 ]);
 		yourself.
 		

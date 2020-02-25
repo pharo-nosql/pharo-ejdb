@@ -46,6 +46,15 @@ EJDBCollection >> addFromJSONString: aString [
 ]
 
 { #category : #accessing }
+EJDBCollection >> at: oid [ 
+	| record |
+	
+	record := JBL new.
+	self ejdb_get: oid to: record.
+	^ record
+]
+
+{ #category : #accessing }
 EJDBCollection >> database [
 
 	^ database
@@ -55,6 +64,12 @@ EJDBCollection >> database [
 EJDBCollection >> ejdb_del: id [
 
 	self ffiCall: #(iwrc ejdb_del(EJDB database, const char *name, int64_t id))
+]
+
+{ #category : #private }
+EJDBCollection >> ejdb_get: id to: jblp [
+	
+	^ self ffiCall: #(iwrc ejdb_get(EJDB database, const char *name, int64_t id, JBL *jblp))
 ]
 
 { #category : #adding }

@@ -49,12 +49,6 @@ JBL class >> printerFunctionXStr [
 	^ PrinterFunctionXStr
 ]
 
-{ #category : #converting }
-JBL >> asString [
-	
-	^ self asXSTR asString
-]
-
 { #category : #accessing }
 JBL >> destroy [
 
