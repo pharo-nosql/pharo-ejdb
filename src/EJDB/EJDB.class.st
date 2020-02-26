@@ -49,7 +49,7 @@ EJDB class >> openReadOnly: aName [
 ]
 
 { #category : #opening }
-EJDB class >> openTrancate: aName [
+EJDB class >> openTruncate: aName [
 	
 	^ self open: aName mode: IWKV_TRUNC
 ]
@@ -57,7 +57,8 @@ EJDB class >> openTrancate: aName [
 { #category : #'opening/closing' }
 EJDB >> close [
 
-	self validateResult: self ejdb_close
+	self validateResult: self ejdb_close.
+	self getHandle beNull
 ]
 
 { #category : #accessing }
@@ -98,6 +99,12 @@ EJDB >> initialize [
 
 	super initialize.
 	collections := Dictionary new
+]
+
+{ #category : #testing }
+EJDB >> isOpened [ 
+
+	^ self getHandle notNil and: [ self getHandle isNull not ]
 ]
 
 { #category : #private }

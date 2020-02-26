@@ -60,22 +60,34 @@ EJDBCollection >> database [
 	^ database
 ]
 
-{ #category : #private }
+{ #category : #'private primitives' }
 EJDBCollection >> ejdb_del: id [
 
 	self ffiCall: #(iwrc ejdb_del(EJDB database, const char *name, int64_t id))
 ]
 
-{ #category : #private }
+{ #category : #'private primitives' }
+EJDBCollection >> ejdb_ensure_collection [
+
+	self ffiCall: #(iwrc ejdb_ensure_collection(EJDB database, const char *name))
+]
+
+{ #category : #'private primitives' }
 EJDBCollection >> ejdb_get: id to: jblp [
 	
 	^ self ffiCall: #(iwrc ejdb_get(EJDB database, const char *name, int64_t id, JBL *jblp))
 ]
 
-{ #category : #adding }
+{ #category : #'private primitives' }
 EJDBCollection >> ejdb_put_new: jbl oid: oid [ 
 
 	^ self ffiCall: #(iwrc ejdb_put_new(EJDB database, const char *name, JBL jbl, int64_t *oid))
+]
+
+{ #category : #accessing }
+EJDBCollection >> ensureCollection [
+
+	self validateResult: self ejdb_ensure_collection
 ]
 
 { #category : #initialization }
