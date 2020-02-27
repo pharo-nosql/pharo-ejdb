@@ -6,9 +6,6 @@ See jbl.h
 Class {
 	#name : #JBL,
 	#superclass : #EJDBExternalPointer,
-	#classVars : [
-		'PrinterFunctionXStr'
-	],
 	#category : #EJDB
 }
 
@@ -39,19 +36,6 @@ JBL class >> jbl_destroy: handle [
 JBL class >> jbl_from_json: jblp json: jsonstr [
 	
 	^ self ffiCall: #(iwrc jbl_from_json(JBL *jblp, const char *jsonstr))
-]
-
-{ #category : #private }
-JBL class >> printerFunctionXStr [
-
-	(PrinterFunctionXStr isNil 
-		or: [ PrinterFunctionXStr isNull ])
-		ifTrue: [
-			PrinterFunctionXStr := ExternalAddress 
-				loadSymbol: #jbl_xstr_json_printer 
-				from: EJDBLibrary ].
-
-	^ PrinterFunctionXStr
 ]
 
 { #category : #accessing }
@@ -90,7 +74,7 @@ JBL >> toJSONStringFormat: aPrintFormat [
 	xstr := IWXSTR new.
 	^ [ 
 		self validateResult: (self 
-			jbl_as_json_printer: self class printerFunctionXStr		
+			jbl_as_json_printer: self ffiLibrary printerFunctionXStr		
 			data: xstr getHandle
 			flags: aPrintFormat).
 		xstr toString ]

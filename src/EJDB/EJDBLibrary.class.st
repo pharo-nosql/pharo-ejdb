@@ -2,7 +2,9 @@ Class {
 	#name : #EJDBLibrary,
 	#superclass : #FFILibrary,
 	#instVars : [
-		'session'
+		'session',
+		'printerFunctionXStr',
+		'printerFunctionCount'
 	],
 	#pools : [
 		'EJDBTypes'
@@ -16,7 +18,13 @@ EJDBLibrary class >> ensureInitialized [
 	self uniqueInstance init
 ]
 
-{ #category : #'private-initialization' }
+{ #category : #accessing }
+EJDBLibrary class >> printerFunctionXStr [
+
+	^ self uniqueInstance printerFunctionXStr
+]
+
+{ #category : #'private primitives' }
 EJDBLibrary >> ejdbInit [
 
 	^ self ffiCall: #(iwrc ejdb_init())
@@ -40,6 +48,32 @@ EJDBLibrary >> isInitialized [
 EJDBLibrary >> macModuleName [
 
 	^ FFIMacLibraryFinder findLibrary: 'libejdb2.dylib'
+]
+
+{ #category : #accessing }
+EJDBLibrary >> printerFunctionCount [
+
+	(printerFunctionCount isNil 
+		or: [ printerFunctionCount isNull ])
+		ifTrue: [
+			printerFunctionCount := ExternalAddress 
+				loadSymbol: #jbl_count_json_printer 
+				from: self class ].
+
+	^ printerFunctionCount
+]
+
+{ #category : #accessing }
+EJDBLibrary >> printerFunctionXStr [
+
+	(printerFunctionXStr isNil 
+		or: [ printerFunctionXStr isNull ])
+		ifTrue: [
+			printerFunctionXStr := ExternalAddress 
+				loadSymbol: #jbl_xstr_json_printer 
+				from: self class ].
+
+	^ printerFunctionXStr
 ]
 
 { #category : #accessing }

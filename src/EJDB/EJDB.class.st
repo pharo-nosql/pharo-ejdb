@@ -73,7 +73,7 @@ EJDB >> collectionNamed: aName [
 { #category : #accessing }
 EJDB >> collectionNames [
 
-	^ (self meta toJSONDictionary at: #collections) 
+	^ (self meta at: #collections) 
 		collect: [ :each | each at: #name ]
 ]
 
@@ -108,13 +108,18 @@ EJDB >> isOpened [
 	^ self getHandle notNil and: [ self getHandle isNull not ]
 ]
 
-{ #category : #private }
+{ #category : #accessing }
 EJDB >> meta [
-	| document |
+	| document meta |
 	
 	document := JBL new.
-	self validateResult: (self ejdb_get_meta: document).
-	^ document autoRelease
+	[
+		self validateResult: (self ejdb_get_meta: document).
+		meta := document toJSONDictionary ]
+	ensure: [ 
+		document destroy ].
+	
+	^ meta
 ]
 
 { #category : #accessing }

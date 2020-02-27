@@ -7,6 +7,12 @@ Class {
 	#category : #'EJDB-Tests'
 }
 
+{ #category : #testing }
+EJDBTestCase class >> isAbstract [
+
+	^ self = EJDBTestCase
+]
+
 { #category : #accessing }
 EJDBTestCase >> collection [
 

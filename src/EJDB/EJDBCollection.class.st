@@ -47,11 +47,17 @@ EJDBCollection >> addFromJSONString: aString [
 
 { #category : #accessing }
 EJDBCollection >> at: oid [ 
-	| record |
+	| document |
 	
-	record := JBL new.
-	self validateResult: (self ejdb_get: oid to: record).
-	^ record autoRelease
+	document := JBL new.
+	self validateResult: (self ejdb_get: oid to: document).
+	^ document autoRelease
+]
+
+{ #category : #accessing }
+EJDBCollection >> at: oid put: document [
+
+	self validateResult: (self ejdb_put: document oid: oid)
 ]
 
 { #category : #accessing }
@@ -79,6 +85,12 @@ EJDBCollection >> ejdb_get: id to: jblp [
 ]
 
 { #category : #'private primitives' }
+EJDBCollection >> ejdb_put: jbl oid: id [ 
+	
+	^ self ffiCall: #(iwrc ejdb_put(EJDB database, const char *name, JBL jbl, int64_t id))
+]
+
+{ #category : #'private primitives' }
 EJDBCollection >> ejdb_put_new: jbl oid: oid [ 
 
 	^ self ffiCall: #(iwrc ejdb_put_new(EJDB database, const char *name, JBL jbl, int64_t *oid))
@@ -99,6 +111,13 @@ EJDBCollection >> initializeDatabase: aDatabase name: aName [
 ]
 
 { #category : #accessing }
+EJDBCollection >> meta [
+
+	^ (self database meta at: #collections)
+		detect: [ :each | (each at: #name) = self name ]
+]
+
+{ #category : #accessing }
 EJDBCollection >> name [
 
 	^ name
@@ -108,6 +127,12 @@ EJDBCollection >> name [
 EJDBCollection >> newQueryFromString: aString [
 
 	^ JQL newCollection: self query: aString
+]
+
+{ #category : #querying }
+EJDBCollection >> queryAll [
+
+	^ self queryFromString: '/*'
 ]
 
 { #category : #querying }
@@ -127,4 +152,10 @@ EJDBCollection >> removeAll [
 EJDBCollection >> removeId: oid [
 
 	self validateResult: (self ejdb_del: oid)
+]
+
+{ #category : #accessing }
+EJDBCollection >> size [
+
+	^ self meta at: #rnum
 ]
