@@ -66,7 +66,8 @@ EJDB >> collectionNamed: aName [
 
 	^ collections 
 		at: aName 
-		ifAbsentPut: [ EJDBCollection newDatabase: self name: aName ]
+		ifAbsentPut: [ 
+			(EJDBCollection newDatabase: self name: aName) ensureCollection ]
 ]
 
 { #category : #accessing }
