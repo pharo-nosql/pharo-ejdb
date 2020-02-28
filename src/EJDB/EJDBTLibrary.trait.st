@@ -6,7 +6,7 @@ Trait {
 { #category : #resources }
 EJDBTLibrary classSide >> ffiLibrary [
 
-	^ EJDBLibrary
+	^ EJDBLibrary uniqueInstance
 ]
 
 { #category : #private }
@@ -18,7 +18,7 @@ EJDBTLibrary classSide >> validateResult: iwrc [
 { #category : #resources }
 EJDBTLibrary >> ffiLibrary [
 
-	^ EJDBLibrary
+	^ self class ffiLibrary
 ]
 
 { #category : #private }

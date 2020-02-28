@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'session',
 		'printerFunctionXStr',
-		'printerFunctionCount'
+		'printerFunctionCount',
+		'runner'
 	],
 	#pools : [
 		'EJDBTypes'
@@ -22,6 +23,12 @@ EJDBLibrary class >> ensureInitialized [
 EJDBLibrary class >> printerFunctionXStr [
 
 	^ self uniqueInstance printerFunctionXStr
+]
+
+{ #category : #converting }
+EJDBLibrary >> calloutAPIClass [ 
+
+	^ TFCalloutAPI
 ]
 
 { #category : #'private primitives' }
@@ -74,6 +81,12 @@ EJDBLibrary >> printerFunctionXStr [
 				from: self class ].
 
 	^ printerFunctionXStr
+]
+
+{ #category : #accessing }
+EJDBLibrary >> runner [
+
+	^ runner ifNil: [ runner := TFWorker named: 'EJDB' ]
 ]
 
 { #category : #accessing }

@@ -33,6 +33,19 @@ EJDBCollection >> add: aJBL [
 ]
 
 { #category : #adding }
+EJDBCollection >> addFromJSONDictionary: aDictionary [
+	| id record |
+
+	record := JBL fromJSONString: (STONJSON toString: aDictionary).
+	id := [ self add: record ]
+	ensure: [ record destroy ].
+
+	^ id
+	
+
+]
+
+{ #category : #adding }
 EJDBCollection >> addFromJSONString: aString [
 	| id record |
 
