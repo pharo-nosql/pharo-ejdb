@@ -74,6 +74,17 @@ JQL >> ejdb_exec: ux [
 ]
 
 { #category : #enumerating }
+JQL >> results [
+	| results |
+	
+	results := OrderedCollection new.
+	self resultsDo: [ :eachId :eachDoc |
+		results add: eachDoc	].
+	^ results 
+	
+]
+
+{ #category : #enumerating }
 JQL >> resultsDo: aBlock [
 	"traverses the query cursor calling a block with the result. 
 	 aBlock receives two arguments: 
@@ -88,7 +99,7 @@ JQL >> resultsDo: aBlock [
 			signature: #(iwrc ("struct _EJDB_EXEC *"void *ctx, "EJDB_DOC" void *doc, int64_t *step))
 			block: [ :ctx :docHandle :step | | doc |
 				doc := EJDB_DOC fromHandle: docHandle.
-				aBlock value: doc id value: doc raw.
+				aBlock value: doc id value: doc raw toJSONDictionary.
 				0 ]);
 		yourself.
 		

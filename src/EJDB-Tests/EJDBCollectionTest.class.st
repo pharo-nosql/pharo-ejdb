@@ -6,19 +6,21 @@ Class {
 
 { #category : #tests }
 EJDBCollectionTest >> testAdd [
-	| doc id documents |
+	| doc documents |
 	
-	doc := (JBL fromJSONString: '{ "name" : "Bianca", "age" : 4 }') autoRelease.
-	id := self collection add: doc.
+	doc := (JBL fromJSONString: '{"name":"Bianca","age":4}') autoRelease.
+	self collection add: doc.
 	
 	documents := OrderedCollection new. 
 	self collection queryAll
 		resultsDo: [ :eachId : eachDoc | 
-			documents add: eachId -> eachDoc toJSONString ].
+			documents add: eachId -> eachDoc ].
 		
 	self assert: documents size equals: 1.
 	self assert: documents first key equals: 1. 
-	self assert: documents first value equals: '{"name":"Bianca","age":4}'.
+	self 
+		assert: documents first value 
+		equals: (Dictionary newFromPairs: { 'name'. 'Bianca'. 'age'. 4})
 ]
 
 { #category : #tests }
@@ -45,6 +47,36 @@ EJDBCollectionTest >> testAtPut [
 		put: (JBL fromJSONString: '{"name":"Bianca","age":5}') autoRelease.	
 	doc := (self collection at: 1) toJSONString.	
 	self assert: doc equals: '{"name":"Bianca","age":5}'
+]
+
+{ #category : #tests }
+EJDBCollectionTest >> testQuery [
+	| documents |
+	
+	self collection 
+		addFromJSONString: '{"name":"Bianca","age":4}';
+		addFromJSONString: '{"name":"Nera","age":8}';
+		addFromJSONString: '{"name":"Green","age":9}'.
+
+	documents := (self collection query: '/[ "age" > 5 ]') results.
+	self assert: documents size equals: 2.
+	
+	documents := (self collection query: [ :each | each age > 5 ]) results.
+	self assert: documents size equals: 2
+]
+
+{ #category : #tests }
+EJDBCollectionTest >> testQueryFromString [
+	| documents |
+	
+	self collection 
+		addFromJSONString: '{"name":"Bianca","age":4}';
+		addFromJSONString: '{"name":"Nera","age":8}';
+		addFromJSONString: '{"name":"Green","age":9}'.
+
+	documents := (self collection queryFromString: '/[ "age" > 5 ]') results.
+		
+	self assert: documents size equals: 2
 ]
 
 { #category : #tests }

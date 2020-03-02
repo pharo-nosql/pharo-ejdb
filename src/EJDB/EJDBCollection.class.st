@@ -143,6 +143,14 @@ EJDBCollection >> newQueryFromString: aString [
 ]
 
 { #category : #querying }
+EJDBCollection >> query: aBlockOrString [
+	
+	^ self queryFromString: (aBlockOrString isString 
+		ifTrue: [ aBlockOrString ]
+		ifFalse: [ aBlockOrString asPersistenceQuery ])
+]
+
+{ #category : #querying }
 EJDBCollection >> queryAll [
 
 	^ self queryFromString: '/*'
