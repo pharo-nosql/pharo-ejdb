@@ -1,3 +1,9 @@
+"
+I represent a collection of EJDB and its basic operations. 
+I implement basic I/O operations: add:, at:, at:put: and convenience methods that receive a JSON dictionary or/and a JSON string.
+I implement also query operations: select: and detect: and a low-level query mechanism with query:
+ 
+"
 Class {
 	#name : #EJDBCollection,
 	#superclass : #Object,
@@ -41,8 +47,6 @@ EJDBCollection >> addFromJSONDictionary: aDictionary [
 	ensure: [ record destroy ].
 
 	^ id
-	
-
 ]
 
 { #category : #adding }
@@ -74,9 +78,24 @@ EJDBCollection >> at: oid put: document [
 ]
 
 { #category : #accessing }
+EJDBCollection >> at: oid putJSONDictionary: aDictionary [
+	| record |
+
+	record := JBL fromJSONString: (STONJSON toString: aDictionary).
+	[ self at: oid put: record ]
+	ensure: [ record destroy ]
+]
+
+{ #category : #accessing }
 EJDBCollection >> database [
 
 	^ database
+]
+
+{ #category : #enumerating }
+EJDBCollection >> detect: aQueryString [
+
+	^ (self query: aQueryString) detect
 ]
 
 { #category : #'private primitives' }
@@ -137,29 +156,21 @@ EJDBCollection >> name [
 ]
 
 { #category : #'private factory' }
-EJDBCollection >> newQueryFromString: aString [
+EJDBCollection >> newQuery: aString [
 
 	^ JQL newCollection: self query: aString
 ]
 
 { #category : #querying }
-EJDBCollection >> query: aBlockOrString [
-	
-	^ self queryFromString: (aBlockOrString isString 
-		ifTrue: [ aBlockOrString ]
-		ifFalse: [ aBlockOrString asPersistenceQuery ])
+EJDBCollection >> query: aString [
+
+	^ (self newQuery: aString) autoRelease
 ]
 
 { #category : #querying }
 EJDBCollection >> queryAll [
 
-	^ self queryFromString: '/*'
-]
-
-{ #category : #querying }
-EJDBCollection >> queryFromString: aString [
-
-	^ (self newQueryFromString: aString) autoRelease
+	^ self query: '/*'
 ]
 
 { #category : #removing }
@@ -173,6 +184,12 @@ EJDBCollection >> removeAll [
 EJDBCollection >> removeId: oid [
 
 	self validateResult: (self ejdb_del: oid)
+]
+
+{ #category : #enumerating }
+EJDBCollection >> select: aQueryString [
+
+	^ (self query: aQueryString) select
 ]
 
 { #category : #accessing }

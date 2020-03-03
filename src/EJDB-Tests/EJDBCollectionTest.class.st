@@ -50,6 +50,37 @@ EJDBCollectionTest >> testAtPut [
 ]
 
 { #category : #tests }
+EJDBCollectionTest >> testAtPutJSONDictionary [
+	| doc id |
+	
+	id := self collection add: (JBL fromJSONString: '{"name":"Bianca","age":4}') autoRelease.
+	doc := (self collection at: 1) toJSONString.	
+	self assert: doc equals: '{"name":"Bianca","age":4}'.
+
+	self collection 
+		at: id
+		putJSONDictionary: (Dictionary newFromPairs: {
+			'name'. 'Bianca'.
+			'age'. 5 }).	
+	doc := (self collection at: 1) toJSONString.	
+	self assert: doc equals: '{"name":"Bianca","age":5}'
+]
+
+{ #category : #tests }
+EJDBCollectionTest >> testDetect [
+	| document |
+	
+	self collection 
+		addFromJSONString: '{"name":"Bianca","age":4}';
+		addFromJSONString: '{"name":"Nera","age":8}';
+		addFromJSONString: '{"name":"Green","age":9}'.
+
+	document := self collection detect: '/[ "age" > 5 and "age" < 9 ]'.
+	self assert: (document at: #name) equals: 'Nera'.
+	
+]
+
+{ #category : #tests }
 EJDBCollectionTest >> testQuery [
 	| documents |
 	
@@ -61,22 +92,6 @@ EJDBCollectionTest >> testQuery [
 	documents := (self collection query: '/[ "age" > 5 ]') results.
 	self assert: documents size equals: 2.
 	
-	documents := (self collection query: [ :each | each age > 5 ]) results.
-	self assert: documents size equals: 2
-]
-
-{ #category : #tests }
-EJDBCollectionTest >> testQueryFromString [
-	| documents |
-	
-	self collection 
-		addFromJSONString: '{"name":"Bianca","age":4}';
-		addFromJSONString: '{"name":"Nera","age":8}';
-		addFromJSONString: '{"name":"Green","age":9}'.
-
-	documents := (self collection queryFromString: '/[ "age" > 5 ]') results.
-		
-	self assert: documents size equals: 2
 ]
 
 { #category : #tests }
@@ -88,6 +103,19 @@ EJDBCollectionTest >> testRemoveId [
 	self assert: self collection size equals: 1.
 	self collection removeId: id.
 	self assert: self collection size equals: 0
+]
+
+{ #category : #tests }
+EJDBCollectionTest >> testSelect [
+	| documents |
+	
+	self collection 
+		addFromJSONString: '{"name":"Bianca","age":4}';
+		addFromJSONString: '{"name":"Nera","age":8}';
+		addFromJSONString: '{"name":"Green","age":9}'.
+
+	documents := self collection select: '/[ "age" > 5 ]'.
+	self assert: documents size equals: 2
 ]
 
 { #category : #tests }

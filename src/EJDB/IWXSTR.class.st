@@ -30,6 +30,12 @@ IWXSTR class >> new [
 	^ self iwxstr_new initialize
 ]
 
+{ #category : #'instance creation' }
+IWXSTR class >> null [
+
+	^ self fromHandle: ExternalAddress null
+]
+
 { #category : #accessing }
 IWXSTR >> destroy [
 
