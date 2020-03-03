@@ -78,7 +78,7 @@ EJDBCollection >> at: oid put: document [
 ]
 
 { #category : #accessing }
-EJDBCollection >> at: oid putJSONDictionary: aDictionary [
+EJDBCollection >> at: oid putDocument: aDictionary [
 	| record |
 
 	record := JBL fromJSONString: (STONJSON toString: aDictionary).
@@ -96,6 +96,48 @@ EJDBCollection >> database [
 EJDBCollection >> detect: aQueryString [
 
 	^ (self query: aQueryString) detect
+]
+
+{ #category : #enumerating }
+EJDBCollection >> detect: aQueryString ifFound: foundBlock ifNone: noneBlock [
+
+	^ (self query: aQueryString) detectIfFound: foundBlock ifNone: noneBlock
+]
+
+{ #category : #enumerating }
+EJDBCollection >> detect: aQueryString ifNone: noneBlock [
+
+	^ (self query: aQueryString) 
+		detectIfFound: [ :doc | doc ] 
+		ifNone: noneBlock
+]
+
+{ #category : #enumerating }
+EJDBCollection >> detectWithId: aQueryString [
+
+	^ (self query: aQueryString) detectWithId
+]
+
+{ #category : #enumerating }
+EJDBCollection >> detectWithId: aQueryString ifFound: foundBlock ifNone: noneBlock [
+
+	^ (self query: aQueryString) 
+		detectWithIdIfFound: foundBlock 
+		ifNone: noneBlock
+]
+
+{ #category : #enumerating }
+EJDBCollection >> detectWithId: aQueryString ifNone: noneBlock [
+
+	^ (self query: aQueryString) 
+		detectWithIdIfFound: [ :doc | doc ] 
+		ifNone: noneBlock
+]
+
+{ #category : #accessing }
+EJDBCollection >> documentAt: oid [
+	
+	^ (self at: oid) toDocument 
 ]
 
 { #category : #'private primitives' }
@@ -190,6 +232,18 @@ EJDBCollection >> removeId: oid [
 EJDBCollection >> select: aQueryString [
 
 	^ (self query: aQueryString) select
+]
+
+{ #category : #enumerating }
+EJDBCollection >> selectAll [
+
+	^ self queryAll select
+]
+
+{ #category : #enumerating }
+EJDBCollection >> selectAllWithId [
+
+	^ self queryAll selectWithId
 ]
 
 { #category : #accessing }

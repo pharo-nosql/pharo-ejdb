@@ -115,7 +115,7 @@ EJDB >> meta [
 	document := JBL new.
 	[
 		self validateResult: (self ejdb_get_meta: document).
-		meta := document toJSONDictionary ]
+		meta := document toDocument ]
 	ensure: [ 
 		document destroy ].
 	

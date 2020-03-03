@@ -29,7 +29,7 @@ EJDBCollectionTest >> testAt [
 	
 	id := self collection add: (JBL fromJSONString: '{ "name" : "Bianca", "age" : 4 }') autoRelease.
 
-	doc := (self collection at: 1) toJSONString.	
+	doc := (self collection at: 1) toString.	
 	self assert: doc equals: '{"name":"Bianca","age":4}'.
 ]
 
@@ -39,13 +39,13 @@ EJDBCollectionTest >> testAtPut [
 	
 	id := self collection add: (JBL fromJSONString: '{"name":"Bianca","age":4}') autoRelease.
 
-	doc := (self collection at: 1) toJSONString.	
+	doc := (self collection at: 1) toString.	
 	self assert: doc equals: '{"name":"Bianca","age":4}'.
 
 	self collection 
 		at: id
 		put: (JBL fromJSONString: '{"name":"Bianca","age":5}') autoRelease.	
-	doc := (self collection at: 1) toJSONString.	
+	doc := (self collection at: 1) toString.	
 	self assert: doc equals: '{"name":"Bianca","age":5}'
 ]
 
@@ -54,15 +54,15 @@ EJDBCollectionTest >> testAtPutJSONDictionary [
 	| doc id |
 	
 	id := self collection add: (JBL fromJSONString: '{"name":"Bianca","age":4}') autoRelease.
-	doc := (self collection at: 1) toJSONString.	
+	doc := (self collection at: 1) toString.	
 	self assert: doc equals: '{"name":"Bianca","age":4}'.
 
 	self collection 
 		at: id
-		putJSONDictionary: (Dictionary newFromPairs: {
+		putDocument: (Dictionary newFromPairs: {
 			'name'. 'Bianca'.
 			'age'. 5 }).	
-	doc := (self collection at: 1) toJSONString.	
+	doc := (self collection at: 1) toString.	
 	self assert: doc equals: '{"name":"Bianca","age":5}'
 ]
 

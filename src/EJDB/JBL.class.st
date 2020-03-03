@@ -56,19 +56,19 @@ JBL >> jbl_as_json_printer: pt data: op flags: pf [
 ]
 
 { #category : #converting }
-JBL >> toJSONDictionary [
+JBL >> toDocument [
 	
-	^ STON fromString: self toJSONString
+	^ STON fromString: self toString
 ]
 
 { #category : #converting }
-JBL >> toJSONString [
+JBL >> toString [
 	
-	^ self toJSONStringFormat: JBL_PRINT_CODEPOINTS
+	^ self toStringFormat: JBL_PRINT_CODEPOINTS
 ]
 
 { #category : #private }
-JBL >> toJSONStringFormat: aPrintFormat [
+JBL >> toStringFormat: aPrintFormat [
 	| xstr |
 	
 	xstr := IWXSTR new.
@@ -84,7 +84,7 @@ JBL >> toJSONStringFormat: aPrintFormat [
 ]
 
 { #category : #converting }
-JBL >> toJSONStringPretty [
+JBL >> toStringPretty [
 	
-	^ self toJSONStringFormat: JBL_PRINT_PRETTY
+	^ self toStringFormat: JBL_PRINT_PRETTY
 ]

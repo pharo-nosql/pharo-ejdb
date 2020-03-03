@@ -72,11 +72,21 @@ JQL >> detect [
 	"Answers all elements in query. 
 	 Is like #results, but it uses ejdb_list instead (to not use callbacks)"
 
+	^ self 
+		detectIfFound: [ :doc | doc ] 
+		ifNone: [ nil ]
+]
+
+{ #category : #enumerating }
+JQL >> detectIfFound: foundBlock ifNone: noneBlock [
+	"Answers all elements in query. 
+	 Is like #results, but it uses ejdb_list instead (to not use callbacks)"
+
 	self 
 		listResultsLimit: 1 
-		do: [ :eachId :eachDoc | ^ eachDoc ].
+		do: [ :eachId :eachDoc | ^ foundBlock value: eachDoc ].
 	
-	^ nil
+	^ noneBlock value
 ]
 
 { #category : #enumerating }
@@ -84,11 +94,22 @@ JQL >> detectWithId [
 	"Answers all elements in query. 
 	 Is like #results, but it uses ejdb_list instead (to not use callbacks)"
 
+	^ self 
+		detectIfFound: [ :assoc | assoc ] 
+		ifNone: [ nil ]
+		
+]
+
+{ #category : #enumerating }
+JQL >> detectWithIdIfFound: foundBlock ifNone: noneBlock [
+	"Answers all elements in query. 
+	 Is like #results, but it uses ejdb_list instead (to not use callbacks)"
+
 	self 
 		listResultsLimit: 1
-		do: [ :eachId :eachDoc | ^ eachId -> eachDoc ].
+		do: [ :eachId :eachDoc | ^ foundBlock value: eachId -> eachDoc ].
 
-	^ nil
+	^ noneBlock value
 ]
 
 { #category : #'private primitives' }
@@ -144,7 +165,7 @@ JQL >> listResultsLimit: limit do: aBlock [
 		[ first isNull ] whileFalse: [ 
 			aBlock 
 				value: first id
-				value: first raw toJSONDictionary.
+				value: first raw toDocument.
 			first := first next ] ]
 	ensure: [ 
 		pool destroy ]
@@ -175,7 +196,7 @@ JQL >> resultsDo: aBlock [
 				doc := EJDB_DOC fromHandle: docHandle.
 				aBlock 
 					value: doc id 
-					value: doc raw toJSONDictionary.
+					value: doc raw toDocument.
 				0 ]);
 		yourself.
 		
