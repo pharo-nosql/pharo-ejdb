@@ -246,6 +246,12 @@ EJDBCollection >> selectAllWithId [
 	^ self queryAll selectWithId
 ]
 
+{ #category : #enumerating }
+EJDBCollection >> selectWithId: aQueryString [
+
+	^ (self query: aQueryString) selectWithId
+]
+
 { #category : #accessing }
 EJDBCollection >> size [
 
