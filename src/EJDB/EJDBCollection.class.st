@@ -86,6 +86,12 @@ EJDBCollection >> at: oid putDocument: aDictionary [
 	ensure: [ record destroy ]
 ]
 
+{ #category : #projections }
+EJDBCollection >> count: aQueryString [
+
+	^ (self query: aQueryString, '| count ') count
+]
+
 { #category : #accessing }
 EJDBCollection >> database [
 

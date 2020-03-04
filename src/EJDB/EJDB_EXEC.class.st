@@ -30,8 +30,8 @@ EJDB_EXEC class >> fieldsDesc [
 	int64_t skip;
 	int64_t limit;
 	int64_t cnt;
-	#IWXSTR *log;
-	#IWPOOL *pool;
+	IWXSTR *log;
+	IWPOOL *pool;
 	)
 ]
 

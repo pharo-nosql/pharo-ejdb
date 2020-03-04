@@ -67,6 +67,19 @@ EJDBCollectionTest >> testAtPutJSONDictionary [
 ]
 
 { #category : #tests }
+EJDBCollectionTest >> testCount [
+	| count |
+
+	self collection 
+		addFromJSONString: '{"name":"Bianca","age":4}';
+		addFromJSONString: '{"name":"Nera","age":8}';
+		addFromJSONString: '{"name":"Green","age":9}'.
+
+	count := self collection count: '/[ "age" > 5 ]'.
+	self assert: count equals: 2
+]
+
+{ #category : #tests }
 EJDBCollectionTest >> testDetect [
 	| document |
 	

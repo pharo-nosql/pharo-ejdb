@@ -54,6 +54,21 @@ JQL >> collection: anObject [
 	collection := anObject
 ]
 
+{ #category : #projections }
+JQL >> count [
+	| ux |
+
+	ux := EJDB_EXEC new
+		db: self database;
+		q: self;
+		cnt: 0;
+		yourself.
+		
+	self validateResult: (self ejdb_exec: ux).
+	
+	^ ux cnt
+]
+
 { #category : #accessing }
 JQL >> database [
 
