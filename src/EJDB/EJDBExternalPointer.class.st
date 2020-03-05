@@ -1,3 +1,6 @@
+"
+I'm a base external pointer in the contextof EJDB.
+"
 Class {
 	#name : #EJDBExternalPointer,
 	#superclass : #FFIExternalObject,

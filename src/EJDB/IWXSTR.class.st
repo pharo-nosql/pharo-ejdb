@@ -1,3 +1,8 @@
+"
+I represent an internal string of EJDB
+
+See iwstr.h
+"
 Class {
 	#name : #IWXSTR,
 	#superclass : #EJDBOpaqueObject,

@@ -1,3 +1,15 @@
+"
+I'm an EJDB database.
+I can be opened using open: and openTruncate:
+To close me is an operation that depends on the user.
+
+I provide access to: 
+- collections
+- database metadata
+
+I also provide database operations like:
+- removing a collection
+"
 Class {
 	#name : #EJDB,
 	#superclass : #EJDBExternalPointer,

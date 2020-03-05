@@ -1,3 +1,7 @@
+"
+I'm a pool containing all constants used for EJDB. 
+This are not all contants in sources, just all constants I'm using at the moment.
+"
 Class {
 	#name : #EJDBConstants,
 	#superclass : #SharedPool,

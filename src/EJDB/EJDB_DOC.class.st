@@ -1,3 +1,8 @@
+"
+I represent a document.
+I contain an id and raw data (in the for of a JBL instance).
+Also, I have information for next/previous elements: this are useful when executing ejdb_list, to iterate on the results of a query.
+"
 Class {
 	#name : #'EJDB_DOC',
 	#superclass : #EJDBStructure,

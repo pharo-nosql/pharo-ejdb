@@ -1,3 +1,6 @@
+"
+I'm a pool containing all specific types used by EJDB.
+"
 Class {
 	#name : #EJDBTypes,
 	#superclass : #SharedPool,

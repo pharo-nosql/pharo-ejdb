@@ -1,3 +1,7 @@
+"
+I define the database keyvalue (KV) storage where data will be placed. 
+I have differnet options, but most important are path (path to the database location) and oflags (to define if it is normal, truncated or readonly)
+"
 Class {
 	#name : #'IWKV_OPTS',
 	#superclass : #EJDBStructure,

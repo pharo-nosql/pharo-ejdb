@@ -1,3 +1,6 @@
+"
+I am the definition of EJDB library
+"
 Class {
 	#name : #EJDBLibrary,
 	#superclass : #FFILibrary,

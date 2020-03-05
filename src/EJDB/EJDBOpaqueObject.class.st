@@ -1,3 +1,6 @@
+"
+I'm an opaque object in the context of EJDB.
+"
 Class {
 	#name : #EJDBOpaqueObject,
 	#superclass : #FFIOpaqueObject,

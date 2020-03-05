@@ -1,3 +1,7 @@
+"
+I define how the wal works. 
+I am not used in current bindings session, but definition is needed for IWKV_OPTS
+"
 Class {
 	#name : #'IWKV_WAL_OPTS',
 	#superclass : #EJDBStructure,

@@ -1,3 +1,8 @@
+"
+I define a query execution. 
+I contain diverse elements needed (or optional to execute a query): database (db) and query (q), but also elements useful for projections like count (cnt) and the visitor to use if I want to use a callback to traverse the results.
+
+"
 Class {
 	#name : #'EJDB_EXEC',
 	#superclass : #EJDBStructure,

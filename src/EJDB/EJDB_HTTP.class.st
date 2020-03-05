@@ -1,3 +1,8 @@
+"
+I am a structure to define HTTP connection (since ejdb can act as a server).
+This is not used right now in the bindings, but is needed to open the database. 
+It may be used in the future.
+"
 Class {
 	#name : #'EJDB_HTTP',
 	#superclass : #EJDBStructure,

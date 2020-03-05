@@ -1,3 +1,7 @@
+"
+I define options to open a database.
+For now we are just interested in the kv section, which points to an IWKV_OPTS structure and define the database physic location itself.
+"
 Class {
 	#name : #'EJDB_OPTS',
 	#superclass : #EJDBStructure,
