@@ -36,7 +36,7 @@ EJDB class >> open: aName mode: mode [
 	| options path |
 
 	options := EJDB_OPTS new.
-	path := ExternalAddress fromString: (FileLocator imageDirectory / 'example.db') fullName.
+	path := ExternalAddress fromString: aName.
 	options kv
 		path: path;
 		oflags: mode.
