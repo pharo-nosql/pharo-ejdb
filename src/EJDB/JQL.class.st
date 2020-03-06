@@ -145,7 +145,7 @@ JQL >> ejdb_list4: db limit: limit log: log list: listp [
 ]
 
 { #category : #'private primitives' }
-JQL >> ejdb_list: db first: first limit: limit pool: pool [  
+JQL >> ejdb_list: db first: first limit: limit pool: pool [
 
 	^ self ffiCall: #(iwrc ejdb_list(
 		EJDB db, 

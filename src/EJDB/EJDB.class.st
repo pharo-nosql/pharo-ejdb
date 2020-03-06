@@ -25,6 +25,25 @@ EJDB class >> ejdbOpen: opts on: ejdbp [
 	^ self ffiCall: #(iwrc ejdb_open(const EJDB_OPTS *opts, EJDB *ejdbp))
 ]
 
+{ #category : #example }
+EJDB class >> example [
+	| db collection query |
+
+	EJDBLibrary uniqueInstance init.
+
+	db := EJDB openTruncate: (FileLocator imageDirectory / 'example.db') fullName.
+	collection := db collectionNamed: 'parrots'.
+
+	collection addFromJSONString: '{ "name" : "Bianca", "age" : 4 }'. 
+	collection addFromJSONString: '{ "name" : "Nera", "age" : 8 }'. 
+
+	query := collection query: '/[ "age" > 0 ]'.
+	query resultsDo: [ :id :record | 
+		(id printString, '->', record printString) crTrace ].
+
+	db close
+]
+
 { #category : #opening }
 EJDB class >> open: aName [
 	
