@@ -55,7 +55,7 @@ EJDBLibrary >> isInitialized [
 ]
 
 { #category : #'accessing platform' }
-EJDBLibrary >> macModuleName [
+EJDBLibrary >> macLibraryName [
 
 	^ FFIMacLibraryFinder findLibrary: 'libejdb2.dylib'
 ]
@@ -90,6 +90,12 @@ EJDBLibrary >> printerFunctionXStr [
 EJDBLibrary >> runner [
 
 	^ runner ifNil: [ runner := TFWorker named: 'EJDB' ]
+]
+
+{ #category : #'accessing platform' }
+EJDBLibrary >> unix64LibraryName [
+
+	^ FFIUnix64LibraryFinder findLibrary: 'libejdb2.so'
 ]
 
 { #category : #accessing }
