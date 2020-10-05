@@ -102,7 +102,7 @@ EJDBLibrary >> unix64LibraryName [
 EJDBLibrary >> validateResult: resultCode [
 
 	resultCode = 0 ifTrue: [ ^ self ].
-	self error: ('EJDB Error: {1}' format: { resultCode })
+	self error: ('EJDB Error: {1}' format: { EJDBErrorConstants fromInteger: resultCode })
 ]
 
 { #category : #accessing }
