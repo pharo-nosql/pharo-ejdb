@@ -183,7 +183,7 @@ EJDBErrorConstants class >> initializeIWFSM [
 EJDBErrorConstants class >> initializeIWKV [
 	| _IWKV_ERROR_START |
 	
-	_IWKV_ERROR_START := (IW_ERROR_START + 5000).
+	_IWKV_ERROR_START := (self errorStart + 5000).
 	IWKV_ERROR_NOTFOUND := self newValue: _IWKV_ERROR_START + 1 message: 'Key not found (IWKV_ERROR_NOTFOUND)'.
 	IWKV_ERROR_KEY_EXISTS := self newValue: _IWKV_ERROR_START + 2 message: 'Key already exists (IWKV_ERROR_KEY_EXISTS)'.
 	IWKV_ERROR_MAXKVSZ := self newValue: _IWKV_ERROR_START + 3 message: 'Size of Key+value must be not greater than 0xfffffff bytes (IWKV_ERROR_MAXKVSZ)'.
@@ -203,25 +203,25 @@ EJDBErrorConstants class >> initializeIWLog [
 	| _IW_ERROR_START |
 
 	_IW_ERROR_START := self errorStart.
-	IW_ERROR_FAIL 					:= self newValue: IW_ERROR_START + 0 message: 'Unspecified error.'.
-	IW_ERROR_ERRNO 					:= self newValue: IW_ERROR_START + 1 message: 'Error with expected errno status set.'.
-	IW_ERROR_IO_ERRNO 				:= self newValue: IW_ERROR_START + 2 message: 'IO error with expected errno status set.'.
-	IW_ERROR_NOT_EXISTS 			:= self newValue: IW_ERROR_START + 3 message: 'Resource is not exists.'.
-	IW_ERROR_READONLY 				:= self newValue: IW_ERROR_START + 4 message: 'Resource is readonly.'.
-	IW_ERROR_ALREADY_OPENED 		:= self newValue: IW_ERROR_START + 5 message: 'Resource is already opened.'.
-	IW_ERROR_THREADING 			:= self newValue: IW_ERROR_START + 6 message: 'Threading error.'.
-	IW_ERROR_THREADING_ERRNO 	:= self newValue: IW_ERROR_START + 7 message: 'Threading error with errno status set.'.
-	IW_ERROR_ASSERTION 			:= self newValue: IW_ERROR_START + 8 message: 'Generic assertion error.'.
-	IW_ERROR_INVALID_HANDLE 		:= self newValue: IW_ERROR_START + 9 message: 'Invalid HANDLE value.'.
-	IW_ERROR_OUT_OF_BOUNDS 		:= self newValue: IW_ERROR_START + 10 message: 'Invalid bounds specified.'.
-	IW_ERROR_NOT_IMPLEMENTED 	:= self newValue: IW_ERROR_START + 11  message: 'Method is not implemented.'.
-	IW_ERROR_ALLOC 					:= self newValue: IW_ERROR_START + 12 message: 'Memory allocation failed.'.
-	IW_ERROR_INVALID_STATE 		:= self newValue: IW_ERROR_START + 13 message: 'Illegal state error.'.
-	IW_ERROR_NOT_ALIGNED 			:= self newValue: IW_ERROR_START + 14 message: 'Argument is not aligned properly.'.
-	IW_ERROR_FALSE 					:= self newValue: IW_ERROR_START + 15 message: 'Request rejection/false response.'.
-	IW_ERROR_INVALID_ARGS 		:= self newValue: IW_ERROR_START + 16 message: 'Invalid function arguments.'.
-	IW_ERROR_OVERFLOW 				:= self newValue: IW_ERROR_START + 17 message: 'Overflow.'.
-	IW_ERROR_INVALID_VALUE 		:= self newValue: IW_ERROR_START + 18 message: 'Invalid value.'.
+	IW_ERROR_FAIL 					:= self newValue: _IW_ERROR_START + 0 message: 'Unspecified error.'.
+	IW_ERROR_ERRNO 					:= self newValue: _IW_ERROR_START + 1 message: 'Error with expected errno status set.'.
+	IW_ERROR_IO_ERRNO 				:= self newValue: _IW_ERROR_START + 2 message: 'IO error with expected errno status set.'.
+	IW_ERROR_NOT_EXISTS 			:= self newValue: _IW_ERROR_START + 3 message: 'Resource is not exists.'.
+	IW_ERROR_READONLY 				:= self newValue: _IW_ERROR_START + 4 message: 'Resource is readonly.'.
+	IW_ERROR_ALREADY_OPENED 		:= self newValue: _IW_ERROR_START + 5 message: 'Resource is already opened.'.
+	IW_ERROR_THREADING 			:= self newValue: _IW_ERROR_START + 6 message: 'Threading error.'.
+	IW_ERROR_THREADING_ERRNO 	:= self newValue: _IW_ERROR_START + 7 message: 'Threading error with errno status set.'.
+	IW_ERROR_ASSERTION 			:= self newValue: _IW_ERROR_START + 8 message: 'Generic assertion error.'.
+	IW_ERROR_INVALID_HANDLE 		:= self newValue: _IW_ERROR_START + 9 message: 'Invalid HANDLE value.'.
+	IW_ERROR_OUT_OF_BOUNDS 		:= self newValue: _IW_ERROR_START + 10 message: 'Invalid bounds specified.'.
+	IW_ERROR_NOT_IMPLEMENTED 	:= self newValue: _IW_ERROR_START + 11  message: 'Method is not implemented.'.
+	IW_ERROR_ALLOC 					:= self newValue: _IW_ERROR_START + 12 message: 'Memory allocation failed.'.
+	IW_ERROR_INVALID_STATE 		:= self newValue: _IW_ERROR_START + 13 message: 'Illegal state error.'.
+	IW_ERROR_NOT_ALIGNED 			:= self newValue: _IW_ERROR_START + 14 message: 'Argument is not aligned properly.'.
+	IW_ERROR_FALSE 					:= self newValue: _IW_ERROR_START + 15 message: 'Request rejection/false response.'.
+	IW_ERROR_INVALID_ARGS 		:= self newValue: _IW_ERROR_START + 16 message: 'Invalid function arguments.'.
+	IW_ERROR_OVERFLOW 				:= self newValue: _IW_ERROR_START + 17 message: 'Overflow.'.
+	IW_ERROR_INVALID_VALUE 		:= self newValue: _IW_ERROR_START + 18 message: 'Invalid value.'.
 
 ]
 
