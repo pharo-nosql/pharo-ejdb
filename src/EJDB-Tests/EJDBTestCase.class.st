@@ -27,8 +27,17 @@ EJDBTestCase >> db [
 
 { #category : #factory }
 EJDBTestCase >> newDB [
-
-	^ EJDB openTruncate: FileLocator imageDirectory / 'test.db'
+	| dbName |
+	
+	dbName := FileLocator imageDirectory / 'test.db'. 
+	
+	"it should be this instead delete+open, but for some reason truncate is not working"
+	"dbName exists
+		ifTrue: [ EJDB openTruncate: dbName fullName ]
+		ifFalse: [ EJDB open: dbName fullName ]"
+	
+	dbName ensureDelete.
+	^ EJDB open: dbName fullName
 ]
 
 { #category : #running }

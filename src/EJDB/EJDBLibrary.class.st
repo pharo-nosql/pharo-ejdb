@@ -28,7 +28,7 @@ EJDBLibrary class >> printerFunctionXStr [
 	^ self uniqueInstance printerFunctionXStr
 ]
 
-{ #category : #converting }
+{ #category : #accessing }
 EJDBLibrary >> calloutAPIClass [ 
 
 	^ TFCalloutAPI
@@ -95,7 +95,9 @@ EJDBLibrary >> runner [
 { #category : #'accessing platform' }
 EJDBLibrary >> unix64LibraryName [
 
-	^ FFIUnix64LibraryFinder findLibrary: 'libejdb2.so'
+	^ FFIUnix64LibraryFinder new 
+		userPaths: #( '/usr/local/lib' );
+		findLibrary: 'libejdb2.so'
 ]
 
 { #category : #accessing }
