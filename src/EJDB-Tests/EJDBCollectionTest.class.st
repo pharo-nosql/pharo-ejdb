@@ -94,6 +94,19 @@ EJDBCollectionTest >> testDetect [
 ]
 
 { #category : #tests }
+EJDBCollectionTest >> testList [
+	| documents |
+	
+	self collection 
+		addFromJSONString: '{"name":"Bianca","age":4}';
+		addFromJSONString: '{"name":"Nera","age":8}';
+		addFromJSONString: '{"name":"Green","age":9}'.
+
+	documents := (self collection list: '/[ "age" > 5 ]') results.
+	self assert: documents size equals: 2
+]
+
+{ #category : #tests }
 EJDBCollectionTest >> testQuery [
 	| documents |
 	

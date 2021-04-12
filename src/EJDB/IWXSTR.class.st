@@ -13,7 +13,7 @@ Class {
 IWXSTR class >> finalizeResourceData: handle [ 
 
 	(handle isNil or: [ handle isNull ]) ifTrue: [ ^ self ].
-	self jbl_destroy: handle.
+	self iwxstr_destroy: handle.
 	handle beNull
 ]
 

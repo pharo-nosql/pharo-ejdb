@@ -22,7 +22,9 @@ JBL class >> fromJSONString: aString [
 	| instance |
 	
 	instance := self new.
-	self validateResult: (self jbl_from_json: instance json: aString).
+	self validateResult: (self 
+		jbl_from_json: instance 
+		utf8Json: aString utf8EncodedWithNULL).
 	^ instance
 ]
 
@@ -36,6 +38,12 @@ JBL class >> jbl_destroy: handle [
 JBL class >> jbl_from_json: jblp json: jsonstr [
 	
 	^ self ffiCall: #(iwrc jbl_from_json(JBL *jblp, const char *jsonstr))
+]
+
+{ #category : #private }
+JBL class >> jbl_from_json: jblp utf8Json: jsonstr [
+	
+	^ self ffiCall: #(iwrc jbl_from_json(JBL *jblp, void *jsonstr))
 ]
 
 { #category : #accessing }

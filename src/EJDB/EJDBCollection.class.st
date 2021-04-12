@@ -190,6 +190,18 @@ EJDBCollection >> initializeDatabase: aDatabase name: aName [
 	name := aName
 ]
 
+{ #category : #querying }
+EJDBCollection >> list: aString [
+
+	^ (self newList: aString) autoRelease
+]
+
+{ #category : #querying }
+EJDBCollection >> listAll [
+
+	^ self list: '/*'
+]
+
 { #category : #accessing }
 EJDBCollection >> meta [
 
@@ -201,6 +213,12 @@ EJDBCollection >> meta [
 EJDBCollection >> name [
 
 	^ name
+]
+
+{ #category : #'private factory' }
+EJDBCollection >> newList: aString [
+
+	^ EJDB_LIST newList: self query: aString
 ]
 
 { #category : #'private factory' }
