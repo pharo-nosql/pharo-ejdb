@@ -1,7 +1,10 @@
+"
+Baseline for [https://github.com/pharo-nosql/pharo-ejdb](https://github.com/pharo-nosql/pharo-ejdb)
+"
 Class {
 	#name : #BaselineOfEJDB,
 	#superclass : #BaselineOf,
-	#category : #BaselineOfEJDB
+	#category : #'BaselineOfEJDB-Base'
 }
 
 { #category : #baselines }
