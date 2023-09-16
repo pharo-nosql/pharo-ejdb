@@ -6,6 +6,8 @@ Pharo-EJDB
 [![Unit Tests](https://github.com/pharo-nosql/pharo-ejdb/workflows/Build/badge.svg?branch=master)](https://github.com/pharo-nosql/pharo-ejdb/actions?query=workflow%3ABuild)
 [![Coverage Status](https://codecov.io/github/pharo-nosql/pharo-ejdb/coverage.svg?branch=master)](https://codecov.io/gh/pharo-nosql/pharo-ejdb/branch/master)
 
+[![Pharo 9](https://img.shields.io/badge/Pharo-9-%23aac9ff.svg)](https://pharo.org/download)
+[![Pharo 10](https://img.shields.io/badge/Pharo-10-%23aac9ff.svg)](https://pharo.org/download)
 [![Pharo 11](https://img.shields.io/badge/Pharo-11-%23aac9ff.svg)](https://pharo.org/download)
 
 Install
