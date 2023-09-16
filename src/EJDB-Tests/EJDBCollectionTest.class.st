@@ -96,6 +96,8 @@ EJDBCollectionTest >> testDetect [
 { #category : #tests }
 EJDBCollectionTest >> testList [
 	| documents |
+
+	self skip: 'See https://github.com/pharo-nosql/pharo-ejdb/issues/2'.
 	
 	self collection 
 		addFromJSONString: '{"name":"Bianca","age":4}';
