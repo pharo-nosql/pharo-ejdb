@@ -10,4 +10,4 @@ git clone --recurse-submodules https://github.com/Softmotions/ejdb.git
 cd ejdb
 mkdir build && cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release
-make install
+sudo make install
