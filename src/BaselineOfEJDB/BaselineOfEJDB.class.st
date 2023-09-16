@@ -14,5 +14,5 @@ BaselineOfEJDB >> baseline: spec [
 	spec for: #common do: [ 
 		spec 
 			package: 'EJDB';
-			package: 'EJDB-Tests' ]
+			package: 'EJDB-Tests' with: [ spec requires: #('EJDB' ) ]]
 ]
