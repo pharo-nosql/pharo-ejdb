@@ -1,4 +1,4 @@
-pharo-EJDB 
+Pharo-EJDB 
 ======
 
 [Pharo](https://www.pharo.org) bindings for https://github.com/Softmotions/ejdb
