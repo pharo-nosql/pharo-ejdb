@@ -1,7 +1,7 @@
-pharo-EJDB 
+Pharo-EJDB 
 ======
 
-Pharo bindings for https://github.com/Softmotions/ejdb
+[Pharo](https://www.pharo.org) bindings for https://github.com/Softmotions/ejdb
 
 Install
 -------

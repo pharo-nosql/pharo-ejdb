@@ -1,0 +1,16 @@
+SmalltalkCISpec {
+  #loading : [
+    SCIMetacelloLoadSpec {
+      #baseline : 'EJDB',
+      #directory : '../src',
+      #load : [ 'CI' ],
+      #platforms : [  #pharo ]
+    }
+  ],
+  #testing : {
+    #coverage : {
+      #packages : [ 'EJDB*' ],
+      #format: #lcov
+    }
+  }
+}
