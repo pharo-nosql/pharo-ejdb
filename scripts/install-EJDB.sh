@@ -4,7 +4,7 @@
 sudo apt-get -y install cmake
 
 # Clone project from https://github.com/Softmotions/ejdb
-git clone --recurse-submodules git@github.com:Softmotions/ejdb.git
+git clone --recurse-submodules https://github.com/Softmotions/ejdb.git
 
 # Build and install
 cd pharo-ejdb
